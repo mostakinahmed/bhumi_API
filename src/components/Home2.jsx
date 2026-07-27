@@ -154,6 +154,10 @@ const FONT_BLOCK = `
   .bd-json .k{ color:#8FBF9F; }
   .bd-json .s{ color:#E3B96A; }
   .bd-plan-highlight{ border:2px solid #A6362C; }
+  .bd-stamp-wrap{ width:168px; height:168px; }
+  @media (max-width:380px){
+    .bd-stamp-wrap{ width:140px; height:140px; }
+  }
   @media (prefers-reduced-motion: no-preference){
     .bd-fade-in{ animation: bdFade .5s ease-out; }
   }
@@ -174,6 +178,7 @@ export default function BDGeoAPI() {
   const unions = DATA[division].zila[zila]?.upazila[upazila]?.union || [];
   const [unionName, setUnionName] = useState(unions[0]?.name || '');
   const [copied, setCopied] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
   function onDivision(v) {
     setDivision(v);
@@ -229,80 +234,97 @@ export default function BDGeoAPI() {
   }
 
   return (
-    <div className="bd-root bd-body min-h-screen">
+    <div className="bd-root bd-body min-h-screen overflow-x-hidden">
       <style>{FONT_BLOCK}</style>
 
       {/* NAV */}
-      <header className="border-b bd-hairline">
-        <div className="max-w-[65%] mx-auto px-6 py-5 flex items-center justify-between">
+      <header className="shadow-lg border-amber-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="bd-forest w-9 h-9 rounded-full flex items-center justify-center">
-              <MapPin className="w-5 h-5" style={{ color: '#F1ECDD' }} />
+            <div className="bd-forest w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0">
+              <MapPin className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: '#F1ECDD' }} />
             </div>
-            <span className="bd-display text-lg font-bold tracking-tight">Bhumi<span className="bd-stamp">API</span></span>
+            <span className="bd-display text-base sm:text-lg font-bold tracking-tight">Bhumi<span className="bd-stamp">API</span></span>
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#endpoints" className="hover:opacity-70">Endpoints</a>
             <a href="#demo" className="hover:opacity-70">Live demo</a>
             <a href="#pricing" className="hover:opacity-70">Pricing</a>
           </nav>
-          <button className="bd-btn-primary text-sm font-semibold px-4 py-2 rounded-sm">Get API key</button>
+          <div className="flex items-center gap-2">
+            <button className="bd-btn-primary text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-sm">
+              Get API key
+            </button>
+            <button
+              className="md:hidden bd-btn-outline w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0"
+              aria-label="Toggle menu"
+              aria-expanded={navOpen}
+              onClick={() => setNavOpen((v) => !v)}
+            >
+              <span className="bd-mono text-xs">{navOpen ? '×' : '≡'}</span>
+            </button>
+          </div>
         </div>
+        {navOpen && (
+          <nav className="md:hidden border-t  bd-hairline px-4 sm:px-6 py-3 flex flex-col gap-3 text-sm font-medium">
+            <a href="#endpoints" onClick={() => setNavOpen(false)} className="hover:opacity-70">Endpoints</a>
+            <a href="#demo" onClick={() => setNavOpen(false)} className="hover:opacity-70">Live demo</a>
+            <a href="#pricing" onClick={() => setNavOpen(false)} className="hover:opacity-70">Pricing</a>
+          </nav>
+        )}
       </header>
 
       {/* HERO */}
-      <section className="max-w-[65%] mx-auto px-6 pt-16 pb-14 flex justify-between gap-12 ">
-        <div className='max-w-[70%]'>
-          <div className="inline-flex items-center gap-2 bd-card px-3 py-1 rounded-full text-xs font-semibold bd-mono mb-6">
-            <Globe2 className="w-3.5 h-3.5 bd-forest-text" />
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-start justify-between gap-10 md:gap-12">
+        <div className="md:max-w-[65%]">
+          <div className="inline-flex w-full md:w-auto items-center gap-2 bd-card md:px-3 px-2 py-1 rounded-full text-[10px] sm:text-xs font-semibold bd-mono mb-6">
+            <Globe2 className="w-3.5 h-3.5 bd-forest-text flex-shrink-0" />
             8 DIVISIONS · 64 ZILA · 495 UPAZILA · 4,571 UNIONS
           </div>
-          <h1 className="bd-display text-4xl md:text-5xl font-bold leading-tight mb-5">
-            Every zila, upazila and union of Bangladesh — one lookup away.
+          <h1 className="bd-display text-2xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5">
+            Every zila, upazila and union of Bangladesh <span className='bd-stamp'> <br className='md:hidden'/>— one lookup away.</span>
           </h1>
-          <p className="text-base md:text-lg opacity-80 leading-relaxed mb-8 max-w-lg">
+          <p className="text-sm sm:text-base md:text-lg opacity-80 leading-relaxed mb-8 ">
             A single, versioned REST API for Bangladesh's full administrative hierarchy,
             from division down to union parishad. Built for logistics, KYC, delivery
             and civic apps that need to know exactly where they stand.
           </p>
           <div className="flex flex-wrap gap-3">
-            <button className="bd-btn-primary font-semibold px-6 py-3 rounded-sm text-sm">Start for free</button>
-            <a href="#demo" className="bd-btn-outline font-semibold px-6 py-3 rounded-sm text-sm inline-block">Try the live demo</a>
+            <button className="bd-btn-primary font-semibold px-5 sm:px-6 py-3 rounded-sm text-sm">Start for free</button>
+            <a href="#demo" className="bd-btn-outline font-semibold px-5 sm:px-6 py-3 rounded-sm text-sm inline-block">Try the live demo</a>
           </div>
         </div>
 
         {/* Signature: stamp card */}
-        <div className="h-120 bd-card rounded-sm p-6 shadow-sm">
+        <div className="bd-card rounded-sm p-6 shadow-sm w-full md:w-auto md:min-w-[320px] md:max-w-sm">
           <p className="bd-mono text-xs uppercase tracking-widest opacity-60 mb-4">Record lookup</p>
           <div className="space-y-3 mb-6">
-            <div className="flex justify-between text-sm border-b bd-hairline pb-2">
-              <span className="opacity-60">Division</span><span className="font-semibold">{division}</span>
+            <div className="flex justify-between text-sm border-b bd-hairline pb-2 gap-3">
+              <span className="opacity-60">Division</span><span className="font-semibold text-right">{division}</span>
             </div>
-            <div className="flex justify-between text-sm border-b bd-hairline pb-2">
-              <span className="opacity-60">Zila</span><span className="font-semibold">{zila}</span>
+            <div className="flex justify-between text-sm border-b bd-hairline pb-2 gap-3">
+              <span className="opacity-60">Zila</span><span className="font-semibold text-right">{zila}</span>
             </div>
-            <div className="flex justify-between text-sm border-b bd-hairline pb-2">
-              <span className="opacity-60">Upazila</span><span className="font-semibold">{upazila}</span>
+            <div className="flex justify-between text-sm border-b bd-hairline pb-2 gap-3">
+              <span className="opacity-60">Upazila</span><span className="font-semibold text-right">{upazila}</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="opacity-60">Union</span><span className="font-semibold">{unionObj?.name}</span>
+            <div className="flex justify-between text-sm gap-3">
+              <span className="opacity-60">Union</span><span className="font-semibold text-right">{unionObj?.name}</span>
             </div>
           </div>
           <div className="flex items-center justify-center py-4">
             <div
-              className="rounded-full flex flex-col items-center justify-center bd-fade-in"
+              className="bd-stamp-wrap rounded-full flex flex-col items-center justify-center bd-fade-in"
               style={{
-                width: 168,
-                height: 168,
                 border: '3px solid #A6362C',
                 boxShadow: 'inset 0 0 0 3px rgba(166,54,44,0.15)',
                 transform: 'rotate(-6deg)',
               }}
               key={fullCode}
             >
-              <span className="bd-mono text-[10px] tracking-widest bd-stamp font-semibold">OFFICIAL RECORD</span>
-              <span className="bd-display text-base font-bold bd-stamp mt-1 px-2 text-center">{fullCode}</span>
-              <span className="bd-mono text-[10px] tracking-widest bd-stamp font-semibold mt-1">VERIFIED</span>
+              <span className="bd-mono text-[9px] sm:text-[10px] tracking-widest bd-stamp font-semibold">OFFICIAL RECORD</span>
+              <span className="bd-display text-sm sm:text-base font-bold bd-stamp mt-1 px-2 text-center break-all">{fullCode}</span>
+              <span className="bd-mono text-[9px] sm:text-[10px] tracking-widest bd-stamp font-semibold mt-1">VERIFIED</span>
             </div>
           </div>
           <p className="text-center bd-mono text-xs opacity-50">generated live from selections below</p>
@@ -311,7 +333,7 @@ export default function BDGeoAPI() {
 
       {/* STATS */}
       <section className="border-y bd-hairline bd-forest">
-        <div className="max-w-[65%] mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6" style={{ color: '#F1ECDD' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6" style={{ color: '#F1ECDD' }}>
           {[
             ['8', 'Divisions'],
             ['64', 'Zila'],
@@ -319,18 +341,18 @@ export default function BDGeoAPI() {
             ['4,571', 'Unions'],
           ].map(([n, l]) => (
             <div key={l} className="text-center md:text-left md:border-l md:pl-6 first:md:border-l-0 first:md:pl-0" style={{ borderColor: 'rgba(241,236,221,0.25)' }}>
-              <div className="bd-display text-3xl font-bold">{n}</div>
-              <div className="bd-mono text-xs uppercase tracking-widest opacity-70 mt-1">{l}</div>
+              <div className="bd-display text-2xl sm:text-3xl font-bold">{n}</div>
+              <div className="bd-mono text-[10px] sm:text-xs uppercase tracking-widest opacity-70 mt-1">{l}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* FEATURES */}
-      <section className="max-w-[65%] mx-auto px-6 py-16">
-        <h2 className="bd-display text-2xl font-bold mb-2">Built for how Bangladesh is actually organized</h2>
-        <p className="opacity-70 mb-10 max-w-xl">Four levels of the real administrative hierarchy, kept current and queryable in milliseconds.</p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <h2 className="bd-display text-xl sm:text-2xl font-bold mb-2">Built for how Bangladesh is actually organized</h2>
+        <p className="opacity-70 mb-8 sm:mb-10  text-sm sm:text-base">Four levels of the real administrative hierarchy, kept current and queryable in milliseconds.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {[
             { icon: Layers, title: 'Full hierarchy', desc: 'Division → zila → upazila → union, correctly nested and cross-referenced.' },
             { icon: Zap, title: 'Sub-40ms lookups', desc: 'Edge-cached responses for every level, no cold starts.' },
@@ -347,33 +369,33 @@ export default function BDGeoAPI() {
       </section>
 
       {/* ENDPOINTS */}
-      <section id="endpoints" className="max-w-[65%] mx-auto px-6 py-16">
+      <section id="endpoints" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
         <div className="flex items-center gap-2 mb-2">
-          <Code2 className="w-5 h-5 bd-forest-text" />
-          <h2 className="bd-display text-2xl font-bold">API reference</h2>
+          <Code2 className="w-5 h-5 bd-forest-text flex-shrink-0" />
+          <h2 className="bd-display text-xl sm:text-2xl font-bold">API reference</h2>
         </div>
-        <p className="opacity-70 mb-8 max-w-xl">Six endpoints cover the entire hierarchy plus search and reverse geocoding.</p>
+        <p className="opacity-70 mb-6 sm:mb-8 text-sm sm:text-base">Six endpoints cover the entire hierarchy plus search and reverse geocoding.</p>
         <div className="bd-card rounded-sm overflow-hidden">
           {ENDPOINTS.map((e, i) => (
-            <div key={e.path} className={`flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 px-5 py-4 ${i !== 0 ? 'border-t bd-hairline' : ''}`}>
+            <div key={e.path} className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-6 px-4 sm:px-5 py-3.5 sm:py-4 ${i !== 0 ? 'border-t bd-hairline' : ''}`}>
               <span className="bd-mono text-xs font-semibold px-2 py-1 rounded-sm w-fit" style={{ backgroundColor: '#24402F', color: '#F1ECDD' }}>
                 {e.method}
               </span>
-              <span className="bd-mono text-sm font-medium">{e.path}</span>
-              <span className="text-sm opacity-60 sm:ml-auto">{e.desc}</span>
+              <span className="bd-mono text-xs sm:text-sm font-medium break-all">{e.path}</span>
+              <span className="text-xs sm:text-sm opacity-60 sm:ml-auto">{e.desc}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* LIVE DEMO */}
-      <section id="demo" className="max-w-[65%] mx-auto px-6 py-16">
-        <h2 className="bd-display text-2xl font-bold mb-2">Try it live</h2>
-        <p className="opacity-70 mb-8 max-w-xl">Drill down through the hierarchy and watch the response update. Sample coverage: Dhaka, Chattogram and Sylhet divisions.</p>
+      <section id="demo" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <h2 className="bd-display text-xl sm:text-2xl font-bold mb-2">Try it live</h2>
+        <p className="opacity-70 mb-6 sm:mb-8 text-sm sm:text-base">Drill down through the hierarchy and watch the response update. Sample coverage: Dhaka, Chattogram and Sylhet divisions.</p>
 
         <div className="grid lg:grid-cols-2 gap-6">
-          <div className="bd-card rounded-sm p-6">
-            <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="bd-card rounded-sm p-5 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <label className="text-sm">
                 <span className="block bd-mono text-xs uppercase tracking-wide opacity-60 mb-1.5">Division</span>
                 <select className="bd-select w-full px-3 py-2 rounded-sm text-sm" value={division} onChange={(e) => onDivision(e.target.value)}>
@@ -399,27 +421,27 @@ export default function BDGeoAPI() {
                 </select>
               </label>
             </div>
-            <div className="flex items-center gap-2 bd-mono text-xs px-3 py-2 rounded-sm" style={{ backgroundColor: '#EFE7CB', border: '1px solid #C9BFA0' }}>
-              <ChevronRight className="w-3.5 h-3.5 bd-stamp" />
-              GET /v1/union?path={division}/{zila}/{upazila}/{unionName}
+            <div className="flex items-start sm:items-center gap-2 bd-mono text-[11px] sm:text-xs px-3 py-2 rounded-sm break-all" style={{ backgroundColor: '#EFE7CB', border: '1px solid #C9BFA0' }}>
+              <ChevronRight className="w-3.5 h-3.5 bd-stamp flex-shrink-0 mt-0.5 sm:mt-0" />
+              <span>GET /v1/union?path={division}/{zila}/{upazila}/{unionName}</span>
             </div>
           </div>
 
-          <div className="bd-json rounded-sm p-5 relative">
-            <button onClick={copyJson} className="absolute top-4 right-4 flex items-center gap-1.5 text-xs bd-mono opacity-70 hover:opacity-100">
+          <div className="bd-json rounded-sm p-4 sm:p-5 relative">
+            <button onClick={copyJson} className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 text-xs bd-mono opacity-70 hover:opacity-100">
               {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
               {copied ? 'Copied' : 'Copy'}
             </button>
-            <pre className="bd-mono text-xs md:text-sm leading-relaxed whitespace-pre-wrap">{jsonResponse}</pre>
+            <pre className="bd-mono text-[11px] sm:text-xs md:text-sm leading-relaxed whitespace-pre-wrap pr-16">{jsonResponse}</pre>
           </div>
         </div>
       </section>
 
       {/* PRICING */}
-      <section id="pricing" className="max-w-[65%] mx-auto px-6 py-16">
-        <h2 className="bd-display text-2xl font-bold mb-2">Pricing</h2>
-        <p className="opacity-70 mb-10 max-w-xl">Start free, scale as your lookup volume grows.</p>
-        <div className="grid md:grid-cols-3 gap-6">
+      <section id="pricing" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+        <h2 className="bd-display text-xl sm:text-2xl font-bold mb-2">Pricing</h2>
+        <p className="opacity-70 mb-8 sm:mb-10 text-sm sm:text-base">Start free, scale as your lookup volume grows.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {PLANS.map((p) => (
             <div key={p.name} className={`bd-card rounded-sm p-6 ${p.highlight ? 'bd-plan-highlight' : ''}`}>
               {p.highlight && <div className="bd-mono text-xs bd-stamp font-semibold mb-3 uppercase tracking-wide">Most used</div>}
@@ -445,20 +467,7 @@ export default function BDGeoAPI() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t bd-hairline">
-        <div className="max-w-[65%] mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Database className="w-4 h-4 bd-forest-text" />
-            <span className="bd-mono text-xs opacity-60">BhumiAPI — administrative geography data for Bangladesh</span>
-          </div>
-          <div className="flex gap-6 text-xs bd-mono opacity-60">
-            <a href="#endpoints" className="hover:opacity-100">Docs</a>
-            <a href="#" className="hover:opacity-100">Status</a>
-            <a href="#" className="hover:opacity-100">Contact</a>
-          </div>
-        </div>
-      </footer>
+    
     </div>
   );
 }
