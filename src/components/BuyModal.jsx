@@ -4,12 +4,12 @@ import axios from "axios";
 
 export default function BuyModal({ isOpen, onClose, selectedPlan }) {
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
     phone: "",
-    organization: "",
+    serviceType: "",
     paymentMethod: "bkash",
-    transactionId: "",
+    transactionNo: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -38,17 +38,30 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
       );
 
       if (response.data.success) {
+        resetForm();
         setSuccess(true);
       } else {
         setError(response.data.message || "Something went wrong.");
       }
     } catch (err) {
       console.error(err);
+      console.log(formData);
       setError("Failed to connect to payment server.");
     } finally {
       setLoading(false);
     }
   };
+
+  function resetForm() {
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      serviceType: "",
+      paymentMethod: "",
+      transactionNo: "",
+    });
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4 p-2 bg-black/60 backdrop-blur-sm animate-fadeIn">
@@ -86,6 +99,10 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
               onClick={() => {
                 setSuccess(false);
                 onClose();
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }}
               className="bd-btn-primary px-6 py-2.5 rounded-sm text-sm font-semibold mt-4"
             >
@@ -154,8 +171,8 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                 <input
                   type="text"
                   required
-                  name="transactionId"
-                  value={formData.transactionId}
+                  name="transactionNo"
+                  value={formData.transactionNo}
                   onChange={handleChange}
                   placeholder="e.g. 9N87AH62KS"
                   maxLength={10}
@@ -185,8 +202,8 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                 <input
                   type="text"
                   required
-                  name="fullName"
-                  value={formData.fullName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   placeholder="Mostakin Ahmed"
                   className="bd-select w-full px-3 py-2 rounded-sm text-sm"
@@ -230,8 +247,8 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                 </span>
                 <input
                   type="text"
-                  name="organization"
-                  value={formData.organization}
+                  name="serviceType"
+                  value={formData.serviceType}
                   onChange={handleChange}
                   placeholder="Victus Byte / University Project"
                   className="bd-select w-full px-3 py-2 rounded-sm text-sm"
