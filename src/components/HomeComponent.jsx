@@ -35,7 +35,6 @@ const ENDPOINTS = [
     path: "/v1/unions?upazila_id=upazila_id",
     desc: "Filter unions by upazila",
   },
- 
 ];
 const PLANS = [
   {
@@ -140,13 +139,20 @@ export default function BDGeoAPI() {
 
   // Load all data sets simultaneously when web loads
   useEffect(() => {
-    async function loadInitialData() {
+    async function loadInitialData(apiKey) {
       try {
+        // Configure headers to include the user's API key
+        const config = {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+          },
+        };
+
         const [divRes, distRes, upaRes, unionRes] = await Promise.all([
-          axios.get(`${API_BASE_URL}/divisions`),
-          axios.get(`${API_BASE_URL}/districts`),
-          axios.get(`${API_BASE_URL}/upazilas`),
-          axios.get(`${API_BASE_URL}/unions`),
+          axios.get(`${API_BASE_URL}/divisions`, config),
+          axios.get(`${API_BASE_URL}/districts`, config),
+          axios.get(`${API_BASE_URL}/upazilas`, config),
+          axios.get(`${API_BASE_URL}/unions`, config),
         ]);
 
         if (divRes.data.success) setDivisions(divRes.data.data);
@@ -154,11 +160,14 @@ export default function BDGeoAPI() {
         if (upaRes.data.success) setAllUpazilas(upaRes.data.data);
         if (unionRes.data.success) setAllUnions(unionRes.data.data);
       } catch (error) {
-        console.error("Error loading geographic data from backend:", error);
+        console.error(
+          "Error loading geographic data from backend:",
+          error.response?.data?.message || error.message,
+        );
       }
     }
 
-    loadInitialData();
+    loadInitialData("bhumi_8e32e3f24ed1488c8442b947422db79d");
   }, []);
 
   // Filter Districts when selectedDivision changes & reset children
