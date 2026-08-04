@@ -75,6 +75,7 @@ const PLANS = [
     period: "",
     limit: "Unlimited",
     features: ["Dedicated infra", "Bulk export", "SLA & onboarding"],
+    active: false,
   },
 ];
 
@@ -132,7 +133,6 @@ export default function BDGeoAPI() {
   const [selectedUpazila, setSelectedUpazila] = useState("");
   const [selectedUnion, setSelectedUnion] = useState("");
 
-  const [copied, setCopied] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -619,7 +619,7 @@ export default function BDGeoAPI() {
               <span className="text-stone-400 uppercase tracking-widest text-[10px] font-semibold">
                 Live API Response
               </span>
-              <span className="text-emerald-400 text-[10px] bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">
+              <span className="text-emerald-400 text-[12px] bg-emerald-950/80 border border-emerald-800 px-2 py-0.5 rounded">
                 200 OK
               </span>
             </div>
@@ -653,7 +653,6 @@ export default function BDGeoAPI() {
       </section>
 
       {/* PRICING */}
-
       <section
         id="pricing"
         className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16"
@@ -664,17 +663,17 @@ export default function BDGeoAPI() {
         <p className="opacity-70 mb-8 sm:mb-10 text-sm sm:text-base">
           Start free, scale as your lookup volume grows.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {PLANS.map((p) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 group">
+          {PLANS.map((p, index) => (
             <div
               key={p.name}
-              className={`bd-card rounded-sm p-6 ${p.highlight ? "bd-plan-highlight" : ""}`}
+              className={`bd-card rounded-sm p-6 transition-all duration-300 relative ${
+                p.highlight
+                  ? "group-hover:not(:hover):border-[#C9BFA0] group-hover:not(:hover):shadow-none"
+                  : ""
+              } hover:border-[#A6362C] hover:shadow-md hover:-translate-y-1`}
             >
-              {p.highlight && (
-                <div className="bd-mono text-xs bd-stamp font-semibold mb-3 uppercase tracking-wide">
-                  Most used
-                </div>
-              )}
+            
               <h3 className="bd-display text-lg font-bold mb-1">{p.name}</h3>
               <div className="flex items-baseline gap-1 mb-1">
                 <span className="text-2xl font-bold">{p.price}</span>
@@ -689,16 +688,23 @@ export default function BDGeoAPI() {
                   </li>
                 ))}
               </ul>
+
               <button
                 onClick={() => handleOpenModal(p)}
-                className={`w-full py-2.5 rounded-sm text-sm font-semibold ${p.highlight ? "bd-btn-primary" : "bd-btn-outline"}`}
+                disabled={p.active === false}
+                className={`w-full py-2.5 rounded-sm text-sm font-semibold transition-all ${
+                  p.active === false
+                    ? "opacity-50 cursor-not-allowed bg-stone-300 border border-stone-300 text-stone-600 hover:bg-stone-200"
+                    : "bd-btn-outline"
+                }`}
               >
-                Choose {p.name}
+                {p.active === false ? "Unavailable" : `Choose ${p.name}`}
               </button>
             </div>
           ))}
         </div>
       </section>
+
       {/* Render the modal at the bottom of your main layout container */}
       <BuyModal
         isOpen={isModalOpen}

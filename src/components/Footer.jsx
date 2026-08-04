@@ -21,24 +21,7 @@ const FONT_BLOCK = `
   .bd-icon-btn:hover{ background-color: rgba(241,236,221,0.08); color:#F1ECDD; }
 `;
 
-const COLUMNS = [
-  {
-    title: "Product",
-    links: ["Endpoints", "Live demo", "Pricing", "Changelog"],
-  },
-  {
-    title: "Developers",
-    links: ["Documentation", "API reference", "Status page", "Rate limits"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Data sources", "Careers", "Contact"],
-  },
-  {
-    title: "Legal",
-    links: ["Terms of service", "Privacy policy", "Data licence"],
-  },
-];
+
 
 export default function BDGeoFooter() {
   return (
@@ -130,31 +113,7 @@ export default function BDGeoFooter() {
         </div>
       </div>
 
-      {/* Links */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 border-b bd-hairline">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-          {COLUMNS.map((col) => (
-            <div key={col.title}>
-              <h4
-                className="bd-mono text-xs uppercase tracking-[0.18em] mb-4"
-                style={{ color: "rgba(241,236,221,.55)" }}
-              >
-                {col.title}
-              </h4>
-
-              <ul className="space-y-3">
-                {col.links.map((item) => (
-                  <li key={item}>
-                    <a href="#" className="bd-link text-sm">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
+     
 
       {/* Bottom */}
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">

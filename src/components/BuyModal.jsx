@@ -51,7 +51,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4 p-2 bg-black/60 backdrop-blur-sm animate-fadeIn">
       <div className="bd-root bd-card w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden border border-[#C9BFA0] flex flex-col max-h-[90vh]">
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b bd-hairline bg-[#FAF7EE]">
@@ -95,7 +95,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="grid md:grid-cols-2 gap-6 p-6 overflow-y-auto"
+            className="grid md:grid-cols-2 gap-6 md:p-6 p-3 overflow-y-auto"
           >
             {/* LEFT PORTION: Payment Information */}
             <div className="space-y-4 bg-[#F5F0E1] p-5 rounded-sm border bd-hairline">
@@ -142,7 +142,8 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                 <p className="text-amber-800">
                   Send money to{" "}
                   <span className="font-mono font-bold">01700000000</span> via
-                  Send Money / Payment, then enter your Transaction ID below.
+                  Send Money / Payment, <br /> Then enter your Transaction ID
+                  below.
                 </p>
               </div>
 
@@ -157,6 +158,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                   value={formData.transactionId}
                   onChange={handleChange}
                   placeholder="e.g. 9N87AH62KS"
+                  maxLength={10}
                   className="bd-select w-full px-3 py-2 rounded-sm text-sm font-mono uppercase"
                 />
               </label>
@@ -201,7 +203,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="mostakin@example.com"
+                  placeholder="me@mostakinahmed.com"
                   className="bd-select w-full px-3 py-2 rounded-sm text-sm"
                 />
               </label>
@@ -217,6 +219,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
                   value={formData.phone}
                   onChange={handleChange}
                   placeholder="017xxxxxxxx"
+                  maxLength={11}
                   className="bd-select w-full px-3 py-2 rounded-sm text-sm font-mono"
                 />
               </label>
