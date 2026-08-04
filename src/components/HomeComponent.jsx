@@ -255,17 +255,22 @@ export default function BDGeoAPI() {
               Pricing
             </a>
           </nav>
+
           <div className="flex items-center gap-2">
-            <button className="bd-btn-primary text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-sm">
+            <a
+              href="#pricing"
+              className="hover:opacity-70 bd-btn-primary text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-sm"
+            >
               Get API key
-            </button>
+            </a>
+
             <button
-              className="md:hidden bd-btn-outline w-9 h-9 rounded-sm flex items-center justify-center flex-shrink-0"
+              className="md:hidden bd-btn-outline w-9 h-8 rounded-sm flex items-center justify-center flex-shrink-0"
               aria-label="Toggle menu"
               aria-expanded={navOpen}
               onClick={() => setNavOpen((v) => !v)}
             >
-              <span className="bd-mono text-xs">{navOpen ? "×" : "≡"}</span>
+              <span className="bd-mono">{navOpen ? "×" : "≡"}</span>
             </button>
           </div>
         </div>
@@ -673,7 +678,6 @@ export default function BDGeoAPI() {
                   : ""
               } hover:border-[#A6362C] hover:shadow-md hover:-translate-y-1`}
             >
-            
               <h3 className="bd-display text-lg font-bold mb-1">{p.name}</h3>
               <div className="flex items-baseline gap-1 mb-1">
                 <span className="text-2xl font-bold">{p.price}</span>
