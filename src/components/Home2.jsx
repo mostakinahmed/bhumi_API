@@ -225,13 +225,6 @@ export default function BDGeoAPI() {
 }`;
   }, [division, zila, upazila, unionObj, fullCode]);
 
-  function copyJson() {
-    if (typeof navigator !== 'undefined' && navigator.clipboard) {
-      navigator.clipboard.writeText(jsonResponse).catch(() => {});
-    }
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  }
 
   return (
     <div className="bd-root bd-body min-h-screen overflow-x-hidden">
@@ -427,13 +420,6 @@ export default function BDGeoAPI() {
             </div>
           </div>
 
-          <div className="bd-json rounded-sm p-4 sm:p-5 relative">
-            <button onClick={copyJson} className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 text-xs bd-mono opacity-70 hover:opacity-100">
-              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-              {copied ? 'Copied' : 'Copy'}
-            </button>
-            <pre className="bd-mono text-[11px] sm:text-xs md:text-sm leading-relaxed whitespace-pre-wrap pr-16">{jsonResponse}</pre>
-          </div>
         </div>
       </section>
 
