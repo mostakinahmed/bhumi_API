@@ -16,34 +16,27 @@ import axios from "axios";
 import BuyModal from "./BuyModal";
 
 const ENDPOINTS = [
-  { method: "GET", path: "/v1/divisions", desc: "List all 8 divisions" },
+  { method: "GET", path: "/v1/divisions", desc: "List all divisions" },
+  { method: "GET", path: "/v1/districts", desc: "List all districts" },
+  { method: "GET", path: "/v1/upazilas", desc: "List all upazilas" },
+  { method: "GET", path: "/v1/unions", desc: "List all unions" },
   {
     method: "GET",
-    path: "/v1/divisions/:code/zila",
-    desc: "List zila within a division",
+    path: "/v1/districts?division_id=div_id",
+    desc: "Filter districts by division",
   },
   {
     method: "GET",
-    path: "/v1/zila/:code/upazila",
-    desc: "List upazila within a zila",
+    path: "/v1/upazilas?district_id=dis_id",
+    desc: "Filter upazilas by district",
   },
   {
     method: "GET",
-    path: "/v1/upazila/:code/union",
-    desc: "List unions within an upazila",
+    path: "/v1/unions?upazila_id=upazila_id",
+    desc: "Filter unions by upazila",
   },
-  {
-    method: "GET",
-    path: "/v1/search?q=savar",
-    desc: "Full-text search across every level",
-  },
-  {
-    method: "GET",
-    path: "/v1/geocode?lat=23.83&lng=90.31",
-    desc: "Reverse-geocode coordinates to a union",
-  },
+ 
 ];
-
 const PLANS = [
   {
     name: "Basic",
