@@ -232,7 +232,7 @@ export default function BDGeoAPI() {
 
       {/* NAV */}
       <header className="shadow-lg border-amber-400">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bd-forest w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0">
               <MapPin
@@ -302,12 +302,19 @@ export default function BDGeoAPI() {
       </header>
 
       {/* HERO */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-start justify-between gap-10 md:gap-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-5 sm:pt-16 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-start justify-between gap-10 md:gap-12">
         <div className="md:max-w-[65%]">
-          <div className="inline-flex w-full md:w-auto items-center gap-2 bd-card md:px-3 px-2 py-1 rounded-full text-[10px] sm:text-xs font-semibold bd-mono mb-6">
-            <Globe2 className="w-3.5 h-3.5 bd-forest-text flex-shrink-0" />8
-            DIVISIONS · 64 ZILA · 495 UPAZILA · 4,571 UNIONS
+          <div className="inline-flex flex-wrap items-center justify-center md:justify-start gap-1 bd-card md:px-2.5 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold bd-mono mb-6 shadow-xs">
+            <div className="flex items-center gap-1.5 text-emerald-800 bg-emerald-950/10 px-2 py-0.5 rounded-full border border-emerald-900/10">
+              <Globe2 className="w-3.5 h-3.5" />
+              <span>Bangladesh Geo Data</span>
+            </div>
+            <span className="opacity-40 hidden md:flex">|</span>
+            <span className="opacity-80">
+              8 DIVISION · 64 ZILA · 495 UPAZILA · 4,571 UNIONS
+            </span>
           </div>
+
           <h1 className="bd-display text-2xl sm:text-4xl md:text-5xl font-bold leading-tight mb-5">
             Every zila, upazila and union of Bangladesh{" "}
             <span className="bd-stamp">
@@ -315,13 +322,13 @@ export default function BDGeoAPI() {
               <br className="md:hidden" />— one lookup away.
             </span>
           </h1>
-          <p className="text-sm sm:text-base md:text-lg opacity-80 leading-relaxed mb-8 ">
+          <p className="text-sm sm:text-base text-justify md:text-lg opacity-80 leading-relaxed mb-8 ">
             A single, versioned REST API for Bangladesh's full administrative
             hierarchy, from division down to union parishad. Built for
             logistics, KYC, delivery and civic apps that need to know exactly
             where they stand.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex md:flex-wrap justify-center md:justify-start gap-3">
             <button className="bd-btn-primary font-semibold px-5 sm:px-6 py-3 rounded-sm text-sm">
               Start for free
             </button>
