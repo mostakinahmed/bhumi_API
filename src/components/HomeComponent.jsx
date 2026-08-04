@@ -135,7 +135,7 @@ export default function BDGeoAPI() {
     setIsModalOpen(true);
   };
 
-  const API_BASE_URL = "http://localhost:5000/api";
+  const API_BASE_URL = "https://api-bhumi.mostakinahmed.com/api";
 
   // Load all data sets simultaneously when web loads
   useEffect(() => {
