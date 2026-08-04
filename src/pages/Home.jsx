@@ -1,7 +1,6 @@
-import { StarBackground } from "@/components/StarBackground";
 
 import Footer from "../components/Footer";
-import Home2 from "../components/Home2";
+import Home2 from "../components/HomeComponent";
 
 export const Home = () => {
   return (
