@@ -30,11 +30,11 @@ const ENDPOINTS = [
     path: "/v1/upazilas?district_id=dis_id",
     desc: "Filter upazilas by district",
   },
-  {
-    method: "GET",
-    path: "/v1/unions?upazila_id=upazila_id",
-    desc: "Filter unions by upazila",
-  },
+  // {
+  //   method: "GET",
+  //   path: "/v1/unions?upazila_id=upazila_id",
+  //   desc: "Filter unions by upazila",
+  // },
 ];
 const PLANS = [
   {
@@ -331,12 +331,12 @@ export default function BDGeoAPI() {
             where they stand.
           </p>
           <div className="flex md:flex-wrap justify-center md:justify-start gap-3">
-            <button className="bd-btn-primary font-semibold px-5 sm:px-6 py-3 rounded-sm text-sm">
+            <button className="bd-btn-primary font-semibold px-4 sm:px-6 md:py-3 py-2 rounded-sm text-sm">
               Start for free
             </button>
             <a
               href="#demo"
-              className="bd-btn-outline font-semibold px-5 sm:px-6 py-3 rounded-sm text-sm inline-block"
+              className="bd-btn-outline font-semibold px-4 sm:px-6 md:py-3 py-2 rounded-sm text-sm inline-block"
             >
               Try the live demo
             </a>
@@ -372,7 +372,7 @@ export default function BDGeoAPI() {
               style={{
                 border: "3px solid #A6362C",
                 boxShadow: "inset 0 0 0 3px rgba(166,54,44,0.15)",
-                transform: "rotate(-6deg)",
+                transform: "rotate(-7deg)",
               }}
             >
               <span className="bd-mono text-[9px] sm:text-[10px] tracking-widest bd-stamp font-semibold">
@@ -462,47 +462,127 @@ export default function BDGeoAPI() {
       </section>
 
       {/* ENDPOINTS */}
-
-
       <section
         id="endpoints"
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8"
       >
-        <div className="flex items-center gap-2 mb-2">
+        <div className="flex items-center text-center justify-center gap-2 mb-2">
           <Code2 className="w-5 h-5 bd-forest-text flex-shrink-0" />
           <h2 className="bd-display text-xl sm:text-2xl font-bold">
             API reference
           </h2>
         </div>
         <p className="opacity-70 mb-6 sm:mb-8 text-sm sm:text-base">
-          Six endpoints cover the entire hierarchy plus search and reverse
+          Seven endpoints cover the entire hierarchy plus search and reverse
           geocoding.
         </p>
-        <div className="bd-card rounded-sm overflow-hidden">
-          {ENDPOINTS.map((e, i) => (
-            <div
-              key={e.path}
-              className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-6 px-4 sm:px-5 py-3.5 sm:py-4 ${i !== 0 ? "border-t bd-hairline" : ""}`}
-            >
-              <span
-                className="bd-mono text-xs font-semibold px-2 py-1 rounded-sm w-fit"
-                style={{ backgroundColor: "#24402F", color: "#F1ECDD" }}
-              >
-                {e.method}
-              </span>
-              <span className="bd-mono text-xs sm:text-sm font-medium break-all">
-                {e.path}
-              </span>
-              <span className="text-xs sm:text-sm opacity-60 sm:ml-auto">
-                {e.desc}
-              </span>
+        <div className="md:flex gap-6 ">
+          <div>
+            <div className="bd-card rounded-sm overflow-hidden ">
+              {ENDPOINTS.map((e, i) => (
+                <div
+                  key={e.path}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-6 px-4 sm:px-5 py-3.5 sm:py-4 ${i !== 0 ? "border-t bd-hairline" : ""}`}
+                >
+                  <span
+                    className="bd-mono text-xs font-semibold px-2 py-1 rounded-sm w-fit"
+                    style={{ backgroundColor: "#24402F", color: "#F1ECDD" }}
+                  >
+                    {e.method}
+                  </span>
+                  <span className="bd-mono text-xs sm:text-sm font-medium break-all">
+                    {e.path}
+                  </span>
+                  <span className="text-xs sm:text-sm opacity-60 sm:ml-auto">
+                    {e.desc}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
+
+            <div className="bd-card rounded-t-sm p-4 sm:p-5 mt-6 flex flex-col justify-between">
+              <div>
+                <span className="bd-mono text-xs font-bold text-emerald-600 uppercase tracking-wide block mb-2">
+                  Developer Workflow
+                </span>
+                <h3 className="bd-display text-sm font-bold mb-3">
+                  Complete Integration Guide
+                </h3>
+              </div>
+              <ul className="space-y-2 text-xs opacity-80">
+                <li className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-emerald-900/40 text-emerald-400 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+                    1
+                  </span>
+                  <span className="text-sm  text-justify">
+                    Choose your required API subscription tier from the pricing
+                    plan section
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-emerald-900/40 text-emerald-400 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+                    2
+                  </span>
+                  <span className="text-sm  text-justify">
+                    Complete the secure payment process to instantly generate
+                    your unique API key
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-emerald-900/40 text-emerald-400 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+                    3
+                  </span>
+                  <span className="text-sm text-justify">
+                    Attach your generated key as a Bearer token inside your HTTP
+                    request headers
+                  </span>
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-emerald-900/40 text-emerald-400 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+                    5
+                  </span>
+                  <span className="text-sm  text-justify">
+                    Filter specific zila and districts by passing parent
+                    division codes as parameters
+                  </span>
+                </li>
+
+                <li className="flex items-center gap-2">
+                  <span className="w-4 h-4 rounded-full bg-emerald-900/40 text-emerald-400 flex items-center justify-center font-bold text-[10px] flex-shrink-0">
+                    7
+                  </span>
+                  <span className="text-sm  text-justify">
+                    Handle structured JSON responses returned with standard HTTP
+                    status codes
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            
+            <div className="bd-card rounded-b-sm p-5 sm:p-6 text-center bg-gradient-to-b from-emerald-950/20 to-transparent border border-emerald-900/30">
+              <h3 className="bd-display  sm:text-md font-bold mb-2">
+                Supercharge Your Apps with Complete Bangladeshi Geo-Data
+              </h3>
+
+              <a
+                href="#pricing"
+                className="inline-block bd-btn-primary text-sm font-semibold px-6 py-2.5 rounded-sm shadow-sm transition-all hover:scale-[1.02]"
+              >
+                Get Your API Key Now
+              </a>
+            </div>
+          </div>
+
+          <div className=" bd-card md:w-1/2 rounded-sm mt-5 md:mt-0">
+            <img
+              src="https://7vgva7cju0vcfvwf.public.blob.vercel-storage.com/1782195267108%20%281%29.gif"
+              alt=""
+              className="rounded-sm"
+            />
+          </div>
         </div>
-      </section>
-
-      <section>
-
       </section>
 
       {/* LIVE DEMO */}
@@ -675,7 +755,7 @@ export default function BDGeoAPI() {
       {/* PRICING */}
       <section
         id="pricing"
-        className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16"
+        className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10"
       >
         <h2 className="bd-display text-xl sm:text-2xl font-bold mb-2">
           Pricing

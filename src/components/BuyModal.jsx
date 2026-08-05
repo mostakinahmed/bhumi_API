@@ -29,7 +29,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/submit-sale",
+        "https://bhumi-api.mostakinahmed.com/api/submit-sale",
         {
           plan: selectedPlan?.name,
           price: selectedPlan?.price,
@@ -76,8 +76,12 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
               Complete your details and payment to receive your API key.
             </p>
           </div>
+
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose(); // First function
+              resetForm(); // Second function
+            }}
             className="p-1 rounded-sm hover:bg-stone-200 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -124,10 +128,11 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
               </div>
 
               <div className="text-sm mb-3">
-                <span className="opacity-70 text-xs block">
-                  Selected Plan Price
+                <span className="opacity-70 text-xs block"></span>
+                <span className="text-xl font-bold">
+                  <span className="font-medium text-sm">Plan Price: </span>
+                  {selectedPlan?.price}
                 </span>
-                <span className="text-xl font-bold">{selectedPlan?.price}</span>
                 <span className="text-xs opacity-65">
                   {" "}
                   {selectedPlan?.period}
