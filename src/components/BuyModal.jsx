@@ -65,7 +65,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4 p-2 bg-black/60 backdrop-blur-sm animate-fadeIn">
-      <div className="bd-root bd-card w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden border border-[#C9BFA0] flex flex-col max-h-[90vh]">
+      <div className="bd-root bd-card w-full max-w-4xl rounded-sm shadow-2xl overflow-hidden border border-[#C9BFA0] flex flex-col max-h-[80vh]">
         {/* Modal Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b bd-hairline bg-[#FAF7EE]">
           <div>
