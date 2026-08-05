@@ -462,6 +462,8 @@ export default function BDGeoAPI() {
       </section>
 
       {/* ENDPOINTS */}
+
+
       <section
         id="endpoints"
         className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16"
@@ -499,6 +501,10 @@ export default function BDGeoAPI() {
         </div>
       </section>
 
+      <section>
+
+      </section>
+
       {/* LIVE DEMO */}
       <section
         id="demo"
@@ -514,7 +520,7 @@ export default function BDGeoAPI() {
 
         <div className="grid lg:grid-cols-2 gap-6 items-stretch">
           {/* LEFT SIDE: Dropdowns (Matched Height & Styled) */}
-          <div className="bd-card rounded-sm p-5 sm:p-6 flex flex-col justify-between h-[320px] sm:h-[350px]">
+          <div className="bd-card rounded-sm p-5 sm:p-6 flex flex-col justify-between h-[410px] sm:h-[350px]">
             <div>
               <div className="flex items-center justify-between border-b bd-hairline pb-3 mb-4">
                 <span className="bd-mono uppercase tracking-widest text-[10px] opacity-60 font-semibold">
