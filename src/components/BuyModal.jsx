@@ -79,17 +79,17 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
 
           <button
             onClick={() => {
-              onClose(); // First function
+              onClose(); 
               resetForm(); // Second function
             }}
             className="p-1 rounded-sm hover:bg-stone-200 transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-7 h-7 -mt-5" />
           </button>
         </div>
 
         {success ? (
-          <div className="p-10 text-center flex flex-col items-center justify-center space-y-4 my-auto">
+          <div className="md:p-10 p-5 text-center flex flex-col items-center justify-center space-y-4 my-auto">
             <CheckCircle2 className="w-16 h-16 text-emerald-600 animate-bounce" />
             <h4 className="bd-display text-2xl font-bold">
               Payment & Order Successful!
