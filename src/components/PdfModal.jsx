@@ -23,7 +23,7 @@ export default function PdfModal({ isOpen, onClose }) {
         <div className="flex-1 bg-gray-100">
           {/* Note: Place your generated PDF inside your public folder as 'Bhumi_API_Documentation.pdf' */}
           <iframe
-            src={`${window.location.origin}/Bhumi_API_Documentation_v3.pdf#zoom=75`}
+            src={`${window.location.origin}/Bhumi_API_Docs.pdf#zoom=75`}
             title="Bhumi API Docs"
             className="w-full h-full rounded-lg border border-gray-300"
           />
