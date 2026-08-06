@@ -281,7 +281,7 @@ export default function BDGeoAPI() {
             </button>
 
             <button
-              className="md:hidden bd-btn-outline w-9 h-8 rounded-sm flex items-center justify-center flex-shrink-0"
+              className="md:hidden bg-emerald-600 w-9 h-8 rounded-sm flex items-center justify-center flex-shrink-0"
               aria-label="Toggle menu"
               aria-expanded={navOpen}
               onClick={() => setNavOpen((v) => !v)}
