@@ -3,6 +3,8 @@ import React from "react";
 export default function PdfModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
+  const pdfUrl = "/Bhumi_API_Docs.pdf"; // Update this if your filename is different
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div className="relative w-full max-w-4xl h-[95vh] bg-white rounded shadow-2xl flex flex-col overflow-hidden">
@@ -19,14 +21,28 @@ export default function PdfModal({ isOpen, onClose }) {
           </button>
         </div>
 
-        {/* MODAL BODY (PDF VIEWER) */}
-        <div className="flex-1 bg-gray-100">
-          {/* Note: Place your generated PDF inside your public folder as 'Bhumi_API_Documentation.pdf' */}
-          <iframe
-            src={`${window.location.origin}/Bhumi_API_Docs.pdf#zoom=75`}
-            title="Bhumi API Docs"
-            className="w-full h-full rounded-lg border border-gray-300"
-          />
+        {/* MODAL BODY (OBJECT VIEWER WITH FALLBACK) */}
+        <div className="flex-1 bg-gray-100 flex flex-col p-2">
+          <object
+            data={`${pdfUrl}#zoom=75`}
+            type="application/pdf"
+            className="w-full h-full rounded border border-gray-300 bg-white"
+          >
+            {/* Fallback if Vercel blocks inline rendering */}
+            <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+              <p className="text-gray-700 mb-4">
+                Unable to display PDF directly in this browser frame.
+              </p>
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 bg-[#1b3b2b] text-white font-semibold rounded shadow hover:bg-[#2c5e43] transition-all"
+              >
+                Open / Download Documentation PDF
+              </a>
+            </div>
+          </object>
         </div>
       </div>
     </div>
