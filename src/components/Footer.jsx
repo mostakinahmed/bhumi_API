@@ -21,8 +21,6 @@ const FONT_BLOCK = `
   .bd-icon-btn:hover{ background-color: rgba(241,236,221,0.08); color:#F1ECDD; }
 `;
 
-
-
 export default function BDGeoFooter() {
   return (
     <footer className="bd-footer bd-body">
@@ -56,7 +54,8 @@ export default function BDGeoFooter() {
 
           <div className="flex gap-3 mt-7">
             <a
-              href="#"
+              href="https://github.com/mostakinahmed"
+              target="_blank"
               className="bd-icon-btn w-10 h-10 rounded-full flex items-center justify-center"
             >
               <Github className="w-4 h-4" />
@@ -70,7 +69,8 @@ export default function BDGeoFooter() {
             </a>
 
             <a
-              href="#"
+              href="https://www.linkedin.com/in/mostakinahmed/"
+              target="_blank"
               className="bd-icon-btn w-10 h-10 rounded-full flex items-center justify-center"
             >
               <Linkedin className="w-4 h-4" />
@@ -113,24 +113,31 @@ export default function BDGeoFooter() {
         </div>
       </div>
 
-     
-
       {/* Bottom */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
-        <p
-          className="bd-mono text-xs"
-          style={{ color: "rgba(241,236,221,.5)" }}
-        >
-          © {new Date().getFullYear()} BhumiAPI. Administrative geography data
-          for Bangladesh.
-        </p>
-
-        <p
-          className="bd-mono text-xs"
-          style={{ color: "rgba(241,236,221,.5)" }}
-        >
-          BD-30-DHA · v1 · All systems operational
-        </p>
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-2 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <img
+            src="https://avatars.githubusercontent.com/u/105800326?v=4"
+            alt="Mostakin Ahmed"
+            className="w-8 h-8 rounded-full object-cover border border-emerald-300 shadow-md"
+          />
+          <p
+            className="bd-mono text-xs"
+            style={{ color: "rgba(241,236,221,.5)" }}
+          >
+            © {new Date().getFullYear()} BhumiAPI. Administrative geography data
+            for Bangladesh. Developed by{" "}
+            <a
+              href="https://mostakinahmed.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-amber-100 hover:text-amber-300 underline underline-offset-4 decoration-amber-400/50 hover:decoration-amber-300 transition-all"
+            >
+              Mostakin Ahmed
+            </a>{" "}
+            (SWE, DIU) | Email: me@mostakinahmed.com | Phn: 01773820336.
+          </p>
+        </div>
       </div>
     </footer>
   );
