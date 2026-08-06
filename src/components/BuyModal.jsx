@@ -80,7 +80,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
           <button
             onClick={() => {
               onClose(); 
-              resetForm(); // Second function
+              resetForm(); 
             }}
             className="p-1 rounded-sm hover:bg-stone-200 transition-colors"
           >
