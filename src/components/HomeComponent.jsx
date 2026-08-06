@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import axios from "axios";
 import BuyModal from "./BuyModal";
+import PdfModal from "./PdfModal";
 
 const ENDPOINTS = [
   { method: "GET", path: "/v1/divisions", desc: "List all divisions" },
@@ -126,6 +127,7 @@ export default function BDGeoAPI() {
   const [selectedUnion, setSelectedUnion] = useState("");
 
   const [navOpen, setNavOpen] = useState(false);
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
@@ -229,11 +231,11 @@ export default function BDGeoAPI() {
   }, [selectedUpazila, allUnions]);
 
   return (
-    <div className="bd-root bd-body min-h-screen overflow-x-hidden">
+    <div className="bd-root bd-body mt-15 min-h-screen overflow-x-hidden">
       <style>{FONT_BLOCK}</style>
 
       {/* NAV */}
-      <header className="shadow-lg border-amber-400">
+      <header className="fixed top-0 text-white left-0 w-full z-50 shadow-lg border-b border-amber-400 bg-[#1b3b2b] backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="bd-forest w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center flex-shrink-0">
@@ -258,13 +260,25 @@ export default function BDGeoAPI() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-4">
             <a
               href="#pricing"
-              className="hover:opacity-70 bd-btn-primary text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-sm"
+              className="relative hidden md:block items-center justify-center px-4 py-2 text-xs sm:text-sm font-bold text-white uppercase tracking-wider bg-emerald-600 rounded-sm shadow-md hover:bg-emerald-500 hover:scale-105 active:scale-95 transition-all duration-300 animate-pulse overflow-hidden group"
             >
-              Get API key
+              {/* Shimmer sweep animation overlay */}
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
+
+              {/* Button Text */}
+              <span className="relative z-10">Get API key</span>
             </a>
+
+            {/* DOCS BUTTON */}
+            <button
+              onClick={() => setIsDocsOpen(true)}
+              className="phover:opacity-70 bg-emerald-600 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2 rounded-sm"
+            >
+              Docs
+            </button>
 
             <button
               className="md:hidden bd-btn-outline w-9 h-8 rounded-sm flex items-center justify-center flex-shrink-0"
@@ -302,6 +316,7 @@ export default function BDGeoAPI() {
           </nav>
         )}
       </header>
+      <PdfModal isOpen={isDocsOpen} onClose={() => setIsDocsOpen(false)} />
 
       {/* HERO */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-5 sm:pt-16 pb-10 sm:pb-14 flex flex-col md:flex-row md:items-start justify-between gap-10 md:gap-12">
@@ -560,7 +575,6 @@ export default function BDGeoAPI() {
               </ul>
             </div>
 
-            
             <div className="bd-card rounded-b-sm p-5 sm:p-6 text-center bg-gradient-to-b from-emerald-950/20 to-transparent border border-emerald-900/30">
               <h3 className="bd-display  sm:text-md font-bold mb-2">
                 Supercharge Your Apps with Complete Bangladeshi Geo-Data
