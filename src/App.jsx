@@ -1,15 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
+
+import { Home } from "./pages/Home.jsx";
+import Admin from "./pages/Admin.jsx";
 
 function App() {
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Home />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

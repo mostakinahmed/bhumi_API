@@ -29,7 +29,7 @@ export default function BuyModal({ isOpen, onClose, selectedPlan }) {
 
     try {
       const response = await axios.post(
-        "https://api-bhumi.mostakinahmed.com/api/submit-sale",
+        "http://localhost:5000/api/submit-sale",
         {
           plan: selectedPlan?.name,
           price: selectedPlan?.price,
